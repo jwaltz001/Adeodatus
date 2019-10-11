@@ -23,3 +23,12 @@ router.post('/', (req,res) => {
         }
 	});
 });
+
+//Create new admin
+router.post('/newuser', (req, res)=>{
+    req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+    Users.create(req.body, (err, createdUser)=>{
+		req.session.currentUser = createdUser;
+		res.json(createdUser);
+    });
+});

@@ -27,7 +27,7 @@ app.use(session({
  * Database *
  *          *
  ************/
-const uri = process.env.ATLAS_URI;
+const uri = process.env.ATLAS_URI || ;
 mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true});
 db.on('connected', () => console.log('mongo connected:'));
 
