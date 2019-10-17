@@ -1,19 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-const Users = require('../models/users.model.js');
+const Admin = require('../models/admin.model.js');
+
+///////////////////////ROUTES////////////////////////////
 
 //Start new session
 router.post('/', (req,res) => {
-	Users.findOne({username:req.body.username}, (err, foundUser) => {
-		if(bcrypt.compareSync(req.body.password, foundUser.password)){
-            req.session.currentUser = foundUser;
+	Admin.findOne({username:req.body.username}, (err, foundAdmin) => {
+		if(bcrypt.compareSync(req.body.password, foundAdmin.password)){
+            req.session.currentUser = foundAdmin;
             res.status(201).json({
               status:201,
               message:'session created',
-			  data:{
-				  sessionUser: req.session.currentUser
-			  }
+			  data:{ sessionUser: req.session.currentUser }
             });
         } else {
             res.status(401).json({
@@ -25,12 +25,25 @@ router.post('/', (req,res) => {
 });
 
 //Create new admin
-router.post('/newuser', (req, res)=>{
-    req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-    Users.create(req.body, (err, createdUser)=>{
-		req.session.currentUser = createdUser;
-		res.json(createdUser);
-    });
+router.post('/add', async (req, res)=>{
+	try {
+		req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+		const createdAdmin = await Admin.create(req.body)
+		req.session.currentUser = createdAdmin;
+		res.status(201).json({
+			status:201,
+			message: 'New admin successfully created',
+			data : { createdAdmin: createdAdmin }
+		});
+	} catch (error) {
+		res.status(400).json({error: error.message});
+	}
 });
+
+//Edit Admin Account
+
+
+//Delete Admin Account
+
 
 module.exports = router;

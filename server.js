@@ -27,9 +27,9 @@ app.use(session({
  * Database *
  *          *
  ************/
-const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true});
-db.on('connected', () => console.log('mongo connected:'));
+const dbUri = process.env.ATLAS_URI || 'mongodb://localhost:27017/bandh';
+mongoose.connect(dbUri, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true});
+db.on('connected', () => console.log('mongo connected.'));
 
 /***************
  * Controllers *
