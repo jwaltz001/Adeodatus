@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-const Users = require('../models/users.models.js');
+const Users = require('../models/users.model.js');
 
 //Start new session
 router.post('/', (req,res) => {
@@ -32,3 +32,5 @@ router.post('/newuser', (req, res)=>{
 		res.json(createdUser);
     });
 });
+
+module.exports = router;

@@ -10,7 +10,7 @@ const cors = require('cors');
 
 require('dotenv').config();
 const db = mongoose.connection
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.APIPORT;
 
 /**************
  * Middleware *
@@ -27,15 +27,15 @@ app.use(session({
  * Database *
  *          *
  ************/
-const uri = process.env.ATLAS_URI || ;
-mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true});
+const uri = process.env.ATLAS_URI;
+mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true});
 db.on('connected', () => console.log('mongo connected:'));
 
 /***************
  * Controllers *
  *             *
  ***************/
- const adminController = require('./controller/admin.controller.js');
+ const adminController = require('./controllers/admin.controller.js');
  app.use('/admin', adminController);
 
  const projectsController = require('./controllers/projects.controller.js');
