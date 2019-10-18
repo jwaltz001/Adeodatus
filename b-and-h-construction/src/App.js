@@ -8,7 +8,7 @@ import Home from './components/home.js';
 import About from './components/about.js';
 import Projects from './components/projects.js';
 import Contact from './components/contact.js';
-import Administrator from './components/administrator.js';
+import Administrator from './components/admin/administrator.js';
 import Footer from './components/footer.js';
 
 function App() {
