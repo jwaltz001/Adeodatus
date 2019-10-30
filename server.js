@@ -16,6 +16,7 @@ const PORT = process.env.APIPORT;
  * Middleware *
  *            *
  **************/
+app.use(cors());
 app.use(express.json());
 app.use(session({
 	secret: process.env.SECRET,
