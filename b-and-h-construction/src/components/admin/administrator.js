@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NewProject from './new-project.js'
+import AdminHomePage from './admin-homepage.js'
 import axios from 'axios';
 
 export default class Administrator extends Component {
@@ -29,6 +29,14 @@ export default class Administrator extends Component {
     	});
   	}
 
+	// setLoggedInUser(username){
+	// 	this.setState({
+	// 		loggedInUser: username,
+	// 		username: '',
+	// 		password: ''
+	// 	});
+	// }
+
 	onSubmit(e){
 		e.preventDefault();
 		const userLoginInfo = {
@@ -36,11 +44,23 @@ export default class Administrator extends Component {
 			password: this.state.password
 		};
 		console.log(userLoginInfo);
+		axios.post('http://localhost:3001/admin/', userLoginInfo)
+			.then(res => {
+					const user = res.data.data.sessionUser;
+					this.setState({
+						loggedInUser: user.username
+					});
+			}, err => {
+				console.log(err)
+				console.log("login failed");
+			})
+
 	}
+
 	render() {
-		if(this.state.user) {
+		if(this.state.loggedInUser) {
 			return(
-				<NewProject user={this.state.user}/>
+				<AdminHomePage user={this.state.loggedInUser}/>
 			)
 		}else{
 			return (

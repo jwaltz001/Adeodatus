@@ -17,8 +17,13 @@ export default class NewProject extends Component {
 			}
 		}
 	}
-	
+
 	render() {
+		if (!this.props.user) {
+			return(
+				<p>Must be logged in as an Administrator to view this page</p>
+			)
+		}
 		return(
 			<div>
 				<p>Form for new project</p>

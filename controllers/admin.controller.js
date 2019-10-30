@@ -8,15 +8,18 @@ const Admin = require('../models/admin.model.js');
 //Start new session
 router.post('/', (req,res) => {
 	Admin.findOne({username:req.body.username}, (err, foundAdmin) => {
-		if(bcrypt.compareSync(req.body.password, foundAdmin.password)){
-            req.session.currentUser = foundAdmin;
-            res.status(201).json({
-              status:201,
-              message:'session created',
-			  data:{ sessionUser: req.session.currentUser }
-            });
+		if (foundAdmin) {
+			if(bcrypt.compareSync(req.body.password, foundAdmin.password)){
+				req.session.currentUser = foundAdmin;
+				res.status(201).json({
+					status:201,
+					message:'session created',
+					data:{ sessionUser: req.session.currentUser }
+				});
+			}
         } else {
-            res.status(401).json({
+			console.log("admin controller ln21", err);
+			res.status(401).json({
               status: 401,
               message:'login failed'
             });
