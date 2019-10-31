@@ -15,7 +15,8 @@ import Footer from './components/footer.js';
 function App() {
   	return (
 		<Router>
-			<div className="container">
+			<div className="container-fluid">
+				<img src="/images/avel-chuklanov-IB0VA6VdqBw-unsplash.jpg" width="100%"/>
 				<Navbar />
 				<Route path="/" exact component={Home} />
 				<Route path="/about" component={About} />
