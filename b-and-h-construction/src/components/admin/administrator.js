@@ -52,9 +52,25 @@ export default class Administrator extends Component {
 					});
 			}, err => {
 				console.log(err)
-				console.log("login failed");
 			})
 
+	}
+
+	componentDidMount() {
+		const userLoginInfo = {
+			username: this.state.username,
+			password: this.state.password
+		};
+		axios.get('http://localhost:3001/admin/account', userLoginInfo)
+			.then(res => {
+				console.log(res);
+				// const user = res.data.data.sessionUser;
+				// this.setState({
+				// 	loggedInUser: user.username
+				// });
+			}, err => {
+				console.log(err);
+			})
 	}
 
 	render() {

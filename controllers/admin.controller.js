@@ -11,6 +11,7 @@ router.post('/', (req,res) => {
 		if (foundAdmin) {
 			if(bcrypt.compareSync(req.body.password, foundAdmin.password)){
 				req.session.currentUser = foundAdmin;
+				console.log("post",req.session.currentUser);
 				res.status(201).json({
 					status:201,
 					message:'session created',
@@ -18,7 +19,6 @@ router.post('/', (req,res) => {
 				});
 			}
         } else {
-			console.log("admin controller ln21", err);
 			res.status(401).json({
               status: 401,
               message:'login failed'
@@ -28,19 +28,20 @@ router.post('/', (req,res) => {
 });
 
 //Admin Home Page
-// app.get('/account', (req, res)=>{
-//     //test if user has logged in
-//     if(req.session.currentUser){
-//         //if so, show the "main app"
-//         res.json(req.session.currentUser);
-//     } else {
-//         //if not, redirect to log in page
-//         res.status(401).json({
-//           status:401,
-//           message:'not logged in'
-//         });
-//     }
-// });
+router.get('/account', (req, res)=>{
+    //test if user has logged in
+	console.log("get",req.session.currentUser);
+	if(req.session.currentUser){
+        //if so, show the "main app"
+        res.json(req.session.currentUser);
+    } else {
+        //if not, redirect to log in page
+        res.status(401).json({
+          status:401,
+          message:'not logged in'
+        });
+    }
+});
 
 //Create new admin
 router.post('/add', async (req, res)=>{

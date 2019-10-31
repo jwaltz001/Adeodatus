@@ -10,9 +10,9 @@ export default class AdminHomePage extends Component {
 		}
 		this.handlePageChange = this.handlePageChange.bind(this);
 	}
-	handlePageChange(){
+	handlePageChange(page){
 		this.setState({
-			pageToShow: "NewProject"
+			pageToShow: page
 		})
 	}
 	render() {
@@ -20,7 +20,7 @@ export default class AdminHomePage extends Component {
 			return(
 				<div>
 					<h2>Administrator Home Page</h2>
-					<button className="btn" onClick={this.handlePageChange}>Post a new project</button>
+					<button className="btn" onClick={()=>{this.handlePageChange("NewProject")}}>Post a new project</button>
 				</div>
 			)
 		}else if (this.state.pageToShow === "NewProject") {
