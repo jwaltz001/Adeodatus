@@ -27,6 +27,7 @@ export default class NewProject extends Component {
 		return(
 			<div>
 				<p>Form for new project</p>
+				<button onClick={()=>{this.props.handlePageChange("HomeMenu")}}>Back to Home Page</button>
 			</div>
 		)
 	}
