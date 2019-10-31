@@ -57,11 +57,7 @@ export default class Administrator extends Component {
 	}
 
 	componentDidMount() {
-		const userLoginInfo = {
-			username: this.state.username,
-			password: this.state.password
-		};
-		axios.get('http://localhost:3001/admin/account', userLoginInfo)
+		axios.get('http://localhost:3001/admin/account')
 			.then(res => {
 				console.log(res);
 				// const user = res.data.data.sessionUser;

@@ -4,6 +4,21 @@ const bcrypt = require('bcrypt');
 const Admin = require('../models/admin.model.js');
 
 ///////////////////////ROUTES////////////////////////////
+//Admin Home Page
+router.get('/account', (req, res)=>{
+    //test if user has logged in
+	console.log("get",req.session.currentUser);
+	if(req.session.currentUser){
+        //if so, show the "main app"
+        res.json(req.session.currentUser);
+    } else {
+        //if not, redirect to log in page
+        res.status(401).json({
+          status:401,
+          message:'not logged in'
+        });
+    }
+});
 
 //Start new session
 router.post('/', (req,res) => {
@@ -25,22 +40,6 @@ router.post('/', (req,res) => {
             });
         }
 	});
-});
-
-//Admin Home Page
-router.get('/account', (req, res)=>{
-    //test if user has logged in
-	console.log("get",req.session.currentUser);
-	if(req.session.currentUser){
-        //if so, show the "main app"
-        res.json(req.session.currentUser);
-    } else {
-        //if not, redirect to log in page
-        res.status(401).json({
-          status:401,
-          message:'not logged in'
-        });
-    }
 });
 
 //Create new admin

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import NewProject from './new-project.js'
-import axios from 'axios';
 
 export default class AdminHomePage extends Component {
 	constructor(props) {
@@ -25,7 +24,7 @@ export default class AdminHomePage extends Component {
 			)
 		}else if (this.state.pageToShow === "NewProject") {
 			return(
-				<NewProject user={this.props.user}/>
+				<NewProject user={this.props.user} handlePageChange={this.handlePageChange}/>
 			)
 		}
 
