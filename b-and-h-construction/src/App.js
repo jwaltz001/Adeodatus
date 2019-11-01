@@ -16,8 +16,8 @@ function App() {
   	return (
 		<Router>
 			<div className="container-fluid">
-				<img src="/images/avel-chuklanov-IB0VA6VdqBw-unsplash.jpg" width="100%"/>
 				<Navbar />
+				<div id="header-img-div"></div>
 				<Route path="/" exact component={Home} />
 				<Route path="/about" component={About} />
 				<Route path="/projects" component={Projects} />
